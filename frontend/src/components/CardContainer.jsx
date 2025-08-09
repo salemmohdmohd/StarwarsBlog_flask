@@ -19,7 +19,7 @@ function CardContainer() {
   }, [dispatch]);
 
   return (
-    <div className="container bg-black text-white min-vh-100 py-4">
+    <div className="container bg-black text-white h-100 py-4">
       {/* Characters Section */}
       <h1 className='text-start p-2'>Characters</h1>
       <div className="d-flex flex-wrap justify-content-start gap-3 mb-5">

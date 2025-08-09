@@ -57,7 +57,7 @@ export const Layout = () => {
     }
 
     return (
-        <div className="bg-black position-relative min-vh-100 overflow-hidden">
+        <div className="main-container bg-black position-relative">
             {/* Static colorful stars background */}
             <div className="position-fixed top-0 start-0 end-0 bottom-0" style={{
                 backgroundImage: `

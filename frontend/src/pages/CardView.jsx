@@ -156,7 +156,7 @@ export const CardView = () => {
 
 
   return (
-    <div className="min-vh-100 d-flex flex-column position-relative">
+    <div className="h-100 d-flex flex-column position-relative">
       <div className="container-fluid flex-grow-1 d-flex align-items-center py-2" style={{ zIndex: 1 }}>
         <div className="row w-100 justify-content-center align-items-center" style={{ minHeight: '95vh' }}>
           <div className="col-12 col-xl-11 col-xxl-10">
