@@ -26,6 +26,12 @@
   /* Glow effects */
   --glow-color: rgba(255, 215, 0, 0.5);
   --glow-size: 10px;
+  
+  /* Neon beam light effects */
+  --neon-glow-inner: rgba(255, 215, 0, 0.8);
+  --neon-glow-middle: rgba(255, 215, 0, 0.4);
+  --neon-glow-outer: rgba(255, 215, 0, 0.2);
+  --neon-beam-size: 20px;
 }
 
 /* Quick theme switchers - uncomment one to change the entire theme */
@@ -38,6 +44,9 @@
   --primary-border-color: #dc2626;
   --accent-border-color: #ef4444;
   --glow-color: rgba(220, 38, 38, 0.5);
+  --neon-glow-inner: rgba(220, 38, 38, 0.8);
+  --neon-glow-middle: rgba(220, 38, 38, 0.4);
+  --neon-glow-outer: rgba(220, 38, 38, 0.2);
 }
 
 
@@ -46,6 +55,9 @@
   --primary-border-color: #2563eb;
   --accent-border-color: #3b82f6;
   --glow-color: rgba(37, 99, 235, 0.5);
+  --neon-glow-inner: rgba(37, 99, 235, 0.8);
+  --neon-glow-middle: rgba(37, 99, 235, 0.4);
+  --neon-glow-outer: rgba(37, 99, 235, 0.2);
 }
 */
 
@@ -54,6 +66,9 @@
   --primary-border-color: #16a34a;
   --accent-border-color: #22c55e;
   --glow-color: rgba(22, 163, 74, 0.5);
+  --neon-glow-inner: rgba(22, 163, 74, 0.8);
+  --neon-glow-middle: rgba(22, 163, 74, 0.4);
+  --neon-glow-outer: rgba(22, 163, 74, 0.2);
 }
 */
 
@@ -62,6 +77,9 @@
   --primary-border-color: #7c3aed;
   --accent-border-color: #8b5cf6;
   --glow-color: rgba(124, 58, 237, 0.5);
+  --neon-glow-inner: rgba(124, 58, 237, 0.8);
+  --neon-glow-middle: rgba(124, 58, 237, 0.4);
+  --neon-glow-outer: rgba(124, 58, 237, 0.2);
 }
 */
 
@@ -70,5 +88,8 @@
   --primary-border-color: #ffffff;
   --accent-border-color: #f3f4f6;
   --glow-color: rgba(255, 255, 255, 0.3);
+  --neon-glow-inner: rgba(255, 255, 255, 0.8);
+  --neon-glow-middle: rgba(255, 255, 255, 0.4);
+  --neon-glow-outer: rgba(255, 255, 255, 0.2);
 }
 */

@@ -22,7 +22,7 @@ export const Navbar = ({ user, onLogout }) => {
 	};
 
   return (
-	<nav className="navbar navbar-dark bg-dark sticky-top border-bottom border-secondary">
+	<nav className="navbar navbar-dark bg-black sticky-top border-bottom border-secondary">
 			<div className="container">
 				<Link to="/">
 					<span className="navbar-brand mb-0 h1">StarWarrs</span>

@@ -87,9 +87,14 @@ You can add these classes to any element:
 ### Special Effects
 
 - `.border-glow` - Animated glowing border
-- `.border-lightsaber` - Green lightsaber effect
-- `.border-lightsaber-blue` - Blue lightsaber effect
-- `.border-lightsaber-red` - Red lightsaber effect
+- `.border-lightsaber` - Green lightsaber effect with enhanced neon beams
+- `.border-lightsaber-blue` - Blue lightsaber effect with enhanced neon beams
+- `.border-lightsaber-red` - Red lightsaber effect with enhanced neon beams
+- `.border-neon` - Neon beam light effect
+- `.border-neon-intense` - Intense neon beam with multiple layers
+- `.border-neon-pulse` - Pulsing neon effect
+- `.border-scanner` - Scanning beam effect across border
+- `.border-tube` - Neon tube effect with gradient
 
 ## 🎯 Elements Affected
 
@@ -175,5 +180,51 @@ Your changes will be visible immediately on:
 - Character/planet/vehicle cards
 - Buttons and form inputs
 - All interactive elements
+
+## ⚡ Neon Beam Effects Guide
+
+### Automatic Neon Effects
+
+All borders now have built-in neon beam lighting with multiple glow layers:
+
+- **Inner glow**: Bright core light
+- **Middle glow**: Medium intensity spread
+- **Outer glow**: Soft diffuse light
+
+### Special Neon Classes
+
+```jsx
+// Basic neon effect
+<div className="card border-neon">
+
+// Intense multi-layer neon
+<div className="card border-neon-intense">
+
+// Pulsing neon animation
+<button className="btn border-neon-pulse">
+
+// Scanning beam effect
+<div className="card border-scanner">
+
+// Neon tube effect
+<div className="navbar border-tube">
+```
+
+### Customizing Neon Intensity
+
+Edit the neon variables in `border-themes.css`:
+
+```css
+:root {
+  --neon-glow-inner: rgba(220, 38, 38, 0.9); /* More intense inner glow */
+  --neon-glow-middle: rgba(220, 38, 38, 0.6); /* Stronger middle layer */
+  --neon-glow-outer: rgba(220, 38, 38, 0.3); /* Wider outer glow */
+  --neon-beam-size: 30px; /* Larger beam spread */
+}
+```
+
+### Performance Note
+
+Neon effects use CSS `box-shadow` with multiple layers. For better performance on mobile devices, the effects automatically scale down on smaller screens.
 
 May the Force be with your borders! ⭐

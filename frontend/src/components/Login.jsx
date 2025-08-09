@@ -21,17 +21,16 @@ const Login = ({ onLoginSuccess }) => {
 
   return (
     <div className="d-flex justify-content-center align-items-center min-vh-100" >
-      <div className="bg-dark bg-opacity-25 rounded-3 p-4 w-100 border border-light border-opacity-25"
+      <div className="bg-black  rounded-3 p-4 w-100 border border-light "
            style={{ 
              maxWidth: '400px',
-             backdropFilter: 'blur(10px)'
            }}>
         <h2 className="text-center text-white mb-4">
           Login to Star Wars API
         </h2>
         
         {error && (
-          <div className="alert alert-danger bg-danger bg-opacity-10 border-danger border-opacity-25 text-danger text-center mb-3">
+          <div className="alert alert-danger bg-danger  border-danger  text-danger text-center mb-3">
             {error}
           </div>
         )}
@@ -43,7 +42,7 @@ const Login = ({ onLoginSuccess }) => {
             </label>
             <input
               type="email"
-              className="form-control bg-dark bg-opacity-25 border-light border-opacity-50 text-white"
+              className="form-control bg-black  border-light text-white"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -57,7 +56,7 @@ const Login = ({ onLoginSuccess }) => {
             </label>
             <input
               type="password"
-              className="form-control bg-dark bg-opacity-25 border-light border-opacity-50 text-white"
+              className="form-control bg-black  border-light text-white"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required

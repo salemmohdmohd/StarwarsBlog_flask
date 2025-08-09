@@ -1,5 +1,10 @@
 /* Custom Border Styles for Star Wars App */
 
+/* Custom background utilities */
+.bg-black {
+  background-color: #000000 !important;
+}
+
 /* Override all Bootstrap border utilities */
 .border,
 .border-top,
@@ -18,23 +23,39 @@
 .card {
   border: var(--normal-border) solid var(--primary-border-color) !important;
   border-radius: var(--normal-radius) !important;
+  box-shadow: 
+    0 0 5px var(--neon-glow-inner),
+    0 0 10px var(--neon-glow-middle),
+    0 0 var(--neon-beam-size) var(--neon-glow-outer) !important;
 }
 
 /* Form control borders */
 .form-control {
   border: var(--normal-border) solid var(--primary-border-color) !important;
   border-radius: var(--normal-radius) !important;
+  box-shadow: 
+    0 0 3px var(--neon-glow-inner),
+    0 0 6px var(--neon-glow-middle),
+    0 0 12px var(--neon-glow-outer) !important;
 }
 
 .form-control:focus {
   border-color: var(--accent-border-color) !important;
-  box-shadow: 0 0 0 0.2rem var(--glow-color) !important;
+  box-shadow: 
+    0 0 5px var(--neon-glow-inner),
+    0 0 10px var(--neon-glow-middle),
+    0 0 var(--neon-beam-size) var(--neon-glow-outer),
+    0 0 0 0.2rem var(--glow-color) !important;
 }
 
 /* Button borders */
 .btn {
   border: var(--normal-border) solid var(--primary-border-color) !important;
   border-radius: var(--normal-radius) !important;
+  box-shadow: 
+    0 0 3px var(--neon-glow-inner),
+    0 0 6px var(--neon-glow-middle),
+    0 0 12px var(--neon-glow-outer) !important;
 }
 
 .btn-primary {
@@ -46,11 +67,19 @@
   border-color: var(--accent-border-color) !important;
   background-color: var(--glow-color) !important;
   opacity: 0.8;
+  box-shadow: 
+    0 0 5px var(--neon-glow-inner),
+    0 0 10px var(--neon-glow-middle),
+    0 0 var(--neon-beam-size) var(--neon-glow-outer) !important;
 }
 
 /* Navbar borders */
 .navbar {
   border-bottom: var(--thick-border) solid var(--primary-border-color) !important;
+  box-shadow: 
+    0 2px 5px var(--neon-glow-inner),
+    0 4px 10px var(--neon-glow-middle),
+    0 6px var(--neon-beam-size) var(--neon-glow-outer) !important;
 }
 
 /* Alert borders */
@@ -122,42 +151,161 @@ img {
 /* Animated borders for special effects */
 .border-glow {
   border: var(--normal-border) solid var(--primary-border-color) !important;
-  box-shadow: 0 0 var(--glow-size) var(--glow-color) !important;
+  box-shadow: 
+    0 0 5px var(--neon-glow-inner),
+    0 0 10px var(--neon-glow-middle),
+    0 0 var(--neon-beam-size) var(--neon-glow-outer) !important;
   animation: borderGlow 2s infinite alternate;
 }
 
 @keyframes borderGlow {
   from {
-    box-shadow: 0 0 5px var(--glow-color);
+    box-shadow: 
+      0 0 3px var(--neon-glow-inner),
+      0 0 6px var(--neon-glow-middle),
+      0 0 12px var(--neon-glow-outer);
   }
   to {
-    box-shadow: 0 0 15px var(--glow-color);
+    box-shadow: 
+      0 0 8px var(--neon-glow-inner),
+      0 0 15px var(--neon-glow-middle),
+      0 0 30px var(--neon-glow-outer);
   }
 }
 
-/* Lightsaber effect border */
+/* Neon beam effect classes */
+.border-neon {
+  border: var(--normal-border) solid var(--primary-border-color) !important;
+  box-shadow: 
+    inset 0 0 5px var(--neon-glow-inner),
+    0 0 5px var(--neon-glow-inner),
+    0 0 10px var(--neon-glow-middle),
+    0 0 var(--neon-beam-size) var(--neon-glow-outer) !important;
+}
+
+.border-neon-intense {
+  border: var(--thick-border) solid var(--primary-border-color) !important;
+  box-shadow: 
+    inset 0 0 8px var(--neon-glow-inner),
+    0 0 8px var(--neon-glow-inner),
+    0 0 15px var(--neon-glow-middle),
+    0 0 25px var(--neon-glow-outer),
+    0 0 40px var(--neon-glow-outer) !important;
+}
+
+.border-neon-pulse {
+  border: var(--normal-border) solid var(--primary-border-color) !important;
+  animation: neonPulse 1.5s infinite;
+}
+
+@keyframes neonPulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 5px var(--neon-glow-inner),
+      0 0 10px var(--neon-glow-middle),
+      0 0 15px var(--neon-glow-outer);
+  }
+  50% {
+    box-shadow: 
+      0 0 10px var(--neon-glow-inner),
+      0 0 20px var(--neon-glow-middle),
+      0 0 35px var(--neon-glow-outer);
+  }
+}
+
+/* Lightsaber effect border with enhanced neon beams */
 .border-lightsaber {
   border: var(--thick-border) solid var(--success-border-color) !important;
   box-shadow: 
-    0 0 5px var(--success-border-color),
-    0 0 10px var(--success-border-color),
-    0 0 15px var(--success-border-color) !important;
+    inset 0 0 5px rgba(34, 197, 94, 0.8),
+    0 0 5px rgba(34, 197, 94, 0.8),
+    0 0 10px rgba(34, 197, 94, 0.6),
+    0 0 20px rgba(34, 197, 94, 0.4),
+    0 0 35px rgba(34, 197, 94, 0.2) !important;
+  animation: lightsaberGlow 2s infinite alternate;
 }
 
 .border-lightsaber-blue {
   border: var(--thick-border) solid #0066ff !important;
   box-shadow: 
-    0 0 5px #0066ff,
-    0 0 10px #0066ff,
-    0 0 15px #0066ff !important;
+    inset 0 0 5px rgba(0, 102, 255, 0.8),
+    0 0 5px rgba(0, 102, 255, 0.8),
+    0 0 10px rgba(0, 102, 255, 0.6),
+    0 0 20px rgba(0, 102, 255, 0.4),
+    0 0 35px rgba(0, 102, 255, 0.2) !important;
+  animation: lightsaberGlow 2s infinite alternate;
 }
 
 .border-lightsaber-red {
   border: var(--thick-border) solid var(--error-border-color) !important;
   box-shadow: 
-    0 0 5px var(--error-border-color),
-    0 0 10px var(--error-border-color),
-    0 0 15px var(--error-border-color) !important;
+    inset 0 0 5px rgba(220, 38, 38, 0.8),
+    0 0 5px rgba(220, 38, 38, 0.8),
+    0 0 10px rgba(220, 38, 38, 0.6),
+    0 0 20px rgba(220, 38, 38, 0.4),
+    0 0 35px rgba(220, 38, 38, 0.2) !important;
+  animation: lightsaberGlow 2s infinite alternate;
+}
+
+@keyframes lightsaberGlow {
+  from {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+  to {
+    filter: brightness(1.2);
+    transform: scale(1.02);
+  }
+}
+
+/* Neon beam scanner effect */
+.border-scanner {
+  position: relative;
+  border: var(--normal-border) solid var(--primary-border-color) !important;
+  overflow: hidden;
+}
+
+.border-scanner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--neon-glow-inner),
+    transparent
+  );
+  animation: scanner 2s infinite;
+  z-index: 1;
+}
+
+@keyframes scanner {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Neon tube effect */
+.border-tube {
+  border: var(--extra-thick-border) solid var(--primary-border-color) !important;
+  border-radius: 50px !important;
+  box-shadow: 
+    inset 0 0 10px var(--neon-glow-inner),
+    0 0 10px var(--neon-glow-inner),
+    0 0 20px var(--neon-glow-middle),
+    0 0 40px var(--neon-glow-outer) !important;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    var(--glow-color) 50%,
+    transparent 70%
+  );
 }
 
 /* Responsive border adjustments */
@@ -174,14 +322,23 @@ img {
   }
 }
 
-/* Hover effects */
+/* Hover effects with neon beam enhancement */
 .card:hover {
   border-color: var(--accent-border-color) !important;
   transform: translateY(-2px);
   transition: all 0.3s ease;
+  box-shadow: 
+    0 0 8px var(--neon-glow-inner),
+    0 0 15px var(--neon-glow-middle),
+    0 0 30px var(--neon-glow-outer),
+    0 5px 15px rgba(0, 0, 0, 0.3) !important;
 }
 
 .btn:hover {
   border-color: var(--accent-border-color) !important;
   transition: all 0.3s ease;
+  box-shadow: 
+    0 0 5px var(--neon-glow-inner),
+    0 0 10px var(--neon-glow-middle),
+    0 0 var(--neon-beam-size) var(--neon-glow-outer) !important;
 }
