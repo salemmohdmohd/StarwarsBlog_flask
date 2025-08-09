@@ -1,4 +1,86 @@
-// Updated to use local backend API instead of external SWAPI
+// API functions for interacting with the backend
+const BASE_URL = '/api';
+
+// Authentication API functions
+export const loginUser = async (email, password) => {
+  try {
+    const response = await fetch(`${BASE_URL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include', // Include cookies for session
+      body: JSON.stringify({ email, password })
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.msg || 'Login failed');
+    }
+    
+    return data;
+  } catch (error) {
+    console.error('Login error:', error);
+    throw error;
+  }
+};
+
+export const registerUser = async (email, password) => {
+  try {
+    const response = await fetch(`${BASE_URL}/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include', // Include cookies for session
+      body: JSON.stringify({ email, password })
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.msg || 'Registration failed');
+    }
+    
+    return data;
+  } catch (error) {
+    console.error('Registration error:', error);
+    throw error;
+  }
+};
+
+export const logoutUser = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/auth/logout`, {
+      method: 'POST',
+      credentials: 'include',
+    });
+    
+    return await response.json();
+  } catch (error) {
+    console.error('Logout error:', error);
+    throw error;
+  }
+};
+
+export const getCurrentUser = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/auth/me`, {
+      credentials: 'include',
+    });
+    
+    if (!response.ok) {
+      return null; // Not authenticated
+    }
+    
+    const data = await response.json();
+    return data.user;
+  } catch (error) {
+    console.error('Get current user error:', error);
+    return null;
+  }
+};
 
 export const fetchVehicles = async () => {
   try {
@@ -67,38 +149,110 @@ export const getStarWarsData = async () => {
 // Favorites API functions
 export const getFavorites = async () => {
   try {
-    const res = await fetch("/api/users/favorites");
-    return await res.json();
+    const res = await fetch("/api/users/favorites", {
+      credentials: 'include'
+    });
+    
+    if (!res.ok) {
+      throw new Error('Authentication required');
+    }
+    
+    const backendFavorites = await res.json();
+    
+    // Transform backend format to frontend format
+    const frontendFavorites = backendFavorites.map(fav => {
+      if (fav.people) {
+        return {
+          uid: fav.people.id.toString(),
+          id: fav.people.id,
+          name: fav.people.name,
+          gender: fav.people.gender,
+          birthYear: fav.people.birth_year,
+          type: "character"
+        };
+      } else if (fav.planet) {
+        return {
+          uid: fav.planet.id.toString(),
+          id: fav.planet.id,
+          name: fav.planet.name,
+          climate: fav.planet.climate,
+          population: fav.planet.population,
+          type: "planet"
+        };
+      } else if (fav.vehicle) {
+        return {
+          uid: fav.vehicle.id.toString(),
+          id: fav.vehicle.id,
+          name: fav.vehicle.name,
+          model: fav.vehicle.model,
+          manufacturer: fav.vehicle.manufacturer,
+          type: "vehicle"
+        };
+      }
+      return null;
+    }).filter(Boolean); // Remove any null entries
+    
+    return frontendFavorites;
   } catch (error) {
     console.error("Error fetching favorites:", error);
-    return [];
+    throw error;
   }
 };
 
 export const addFavorite = async (type, id) => {
   try {
-    const res = await fetch(`/api/favorite/${type}/${id}`, {
+    // Map frontend types to backend routes
+    const typeMap = {
+      character: 'people',
+      planet: 'planet',
+      vehicle: 'vehicle'
+    };
+    
+    const backendType = typeMap[type] || type;
+    const res = await fetch(`/api/favorite/${backendType}/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: 'include'
     });
+    
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.msg || 'Failed to add favorite');
+    }
+    
     return await res.json();
   } catch (error) {
     console.error("Error adding favorite:", error);
-    return null;
+    throw error;
   }
 };
 
 export const removeFavorite = async (type, id) => {
   try {
-    const res = await fetch(`/api/favorite/${type}/${id}`, {
+    // Map frontend types to backend routes
+    const typeMap = {
+      character: 'people',
+      planet: 'planet',
+      vehicle: 'vehicle'
+    };
+    
+    const backendType = typeMap[type] || type;
+    const res = await fetch(`/api/favorite/${backendType}/${id}`, {
       method: "DELETE",
+      credentials: 'include'
     });
+    
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.msg || 'Failed to remove favorite');
+    }
+    
     return await res.json();
   } catch (error) {
     console.error("Error removing favorite:", error);
-    return null;
+    throw error;
   }
 };
 

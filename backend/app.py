@@ -15,6 +15,9 @@ from backend.routes import register_routes
 def create_app():
     app = Flask(__name__)
     app.url_map.strict_slashes = False
+    
+    # Session configuration
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
 
     db_url = os.getenv("DATABASE_URL")
     if db_url is not None:

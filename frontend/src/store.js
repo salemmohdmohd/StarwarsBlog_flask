@@ -17,6 +17,12 @@ export default function storeReducer(store, action = {}) {
         starWarsData: action.payload,
       };
 
+    case "set_favorites":
+      return {
+        ...store,
+        favorites: action.payload,
+      };
+
     case "add_favorite": {
       const item = action.payload;
       if (

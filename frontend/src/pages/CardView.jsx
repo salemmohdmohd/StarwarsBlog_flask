@@ -2,6 +2,7 @@
 import { useParams, useLocation, Link } from "react-router-dom";
 import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import { addFavorite, removeFavorite } from "../data/starWarsData.jsx";
 
 export const CardView = () => {
   const params = useParams();
@@ -41,19 +42,31 @@ export const CardView = () => {
     );
   }
 
-  const isInFavorites = store.favorites.find(fav => fav.id === item.id);
+  const isInFavorites = store.favorites.some(fav => fav.id === item.id && fav.type === item.type);
 
-  const handleFavorite = () => {
-    if (isInFavorites) {
-      dispatch({
-        type: "remove_favorite",
-        payload: item.id
-      });
-    } else {
-      dispatch({
-        type: "add_favorite",
-        payload: item
-      });
+  const handleFavorite = async () => {
+    try {
+      if (isInFavorites) {
+        // Remove from backend
+        await removeFavorite(item.type, item.id);
+        // Update local state
+        dispatch({
+          type: "remove_favorite",
+          payload: item
+        });
+      } else {
+        // Add to backend
+        await addFavorite(item.type, item.id);
+        // Update local state
+        dispatch({
+          type: "add_favorite",
+          payload: item
+        });
+      }
+    } catch (error) {
+      console.error("Error updating favorite:", error);
+      // You could show a user-friendly error message here
+      alert("Failed to update favorite. Please try again.");
     }
   };
 

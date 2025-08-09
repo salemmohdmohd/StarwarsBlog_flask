@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
+import { logoutUser } from "../data/starWarsData.jsx";
 
-export const Navbar = () => {
+export const Navbar = ({ user, onLogout }) => {
 	const { store, dispatch } = useGlobalReducer();
 	
 	const removeFavorite = (item) => {
@@ -11,14 +12,29 @@ export const Navbar = () => {
 		});
 	};
 
+	const handleLogout = async () => {
+		try {
+			await logoutUser();
+			onLogout();
+		} catch (error) {
+			console.error('Logout error:', error);
+		}
+	};
+
   return (
 	<nav className="navbar navbar-dark bg-dark sticky-top border-bottom border-secondary">
 			<div className="container">
 				<Link to="/">
 					<span className="navbar-brand mb-0 h1">StarWarrs</span>
 				</Link>
-				<div className="ml-auto">
-					<div className="dropdown">
+				<div className="ml-auto d-flex align-items-center">
+					{user && (
+						<span className="text-light me-3">
+							Welcome, {user.email}
+						</span>
+					)}
+					
+					<div className="dropdown me-3">
 						<div className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 							favorites  {store.favorites.length}
 						</div>
@@ -40,6 +56,15 @@ export const Navbar = () => {
 							)}						
 						</ul>
 					</div>
+					
+					{user && (
+						<button 
+							className="btn btn-outline-light btn-sm"
+							onClick={handleLogout}
+						>
+							Logout
+						</button>
+					)}
 				</div>
 			</div>
 		</nav>

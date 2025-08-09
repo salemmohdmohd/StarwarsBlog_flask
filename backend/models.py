@@ -10,7 +10,7 @@ class User(db.Model):
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean(), nullable=False)
-    favorites = db.relationship('Favorite', backref='user', lazy=True)
+    favorites = db.relationship('Favorite', backref='user', lazy=True, cascade='all, delete-orphan')
 
     def serialize(self):
         return {
@@ -62,7 +62,7 @@ class Vehicle(db.Model):
 
 class Favorite(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    user_id: Mapped[int] = mapped_column(db.ForeignKey('user.id'), nullable=False)
+    user_id: Mapped[int] = mapped_column(db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
     people_id: Mapped[int] = mapped_column(db.ForeignKey('people.id'), nullable=True)
     planet_id: Mapped[int] = mapped_column(db.ForeignKey('planet.id'), nullable=True)
     vehicle_id: Mapped[int] = mapped_column(db.ForeignKey('vehicle.id'), nullable=True)

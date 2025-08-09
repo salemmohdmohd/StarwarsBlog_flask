@@ -1,15 +1,38 @@
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { Link } from "react-router-dom";
 import rigoImageUrl from "../assets/img/rigo-baby.jpg";
+import { addFavorite, removeFavorite } from "../data/starWarsData.jsx";
+
 function Cards({ item }) {
   const { store, dispatch } = useGlobalReducer();
   if (!item) return null;
+  
   const isInFavorites = store.favorites.some(fav => fav.id === item.id && fav.type === item.type);
-  const handleFavorite = () => {
-    dispatch({
-      type: isInFavorites ? "remove_favorite" : "add_favorite",
-      payload: item
-    });
+  
+  const handleFavorite = async () => {
+    try {
+      if (isInFavorites) {
+        // Remove from backend
+        await removeFavorite(item.type, item.id);
+        // Update local state
+        dispatch({
+          type: "remove_favorite",
+          payload: item
+        });
+      } else {
+        // Add to backend
+        await addFavorite(item.type, item.id);
+        // Update local state
+        dispatch({
+          type: "add_favorite",
+          payload: item
+        });
+      }
+    } catch (error) {
+      console.error("Error updating favorite:", error);
+      // You could show a user-friendly error message here
+      alert("Failed to update favorite. Please try again.");
+    }
   };
 
   return (
