@@ -73,16 +73,12 @@ export const CardView = () => {
   // Render different content based on type
   const renderDetails = () => {
     const detailStyle = {
-      marginBottom: '1rem',
-      padding: '0.5rem 0',
       borderBottom: '1px solid rgba(255, 215, 0, 0.2)'
     };
 
     const labelStyle = {
       color: '#ffd700',
-      fontWeight: 'bold',
-      textShadow: '0 0 5px rgba(255, 215, 0, 0.5)',
-      marginRight: '0.5rem'
+      textShadow: '0 0 5px rgba(255, 215, 0, 0.5)'
     };
 
     const valueStyle = {
@@ -94,13 +90,13 @@ export const CardView = () => {
       return (
         <div className="row">
           <div className="col-12">
-            <div style={detailStyle}>
-              <span style={labelStyle}>Climate:</span>
-              <span style={valueStyle}>{item.climate}</span>
+            <div className="mb-3 py-2 fw-bold me-2" style={detailStyle}>
+              <span className="text-warning" style={labelStyle}>Climate:</span>
+              <span className="text-white" style={valueStyle}>{item.climate}</span>
             </div>
-            <div style={detailStyle}>
-              <span style={labelStyle}>Population:</span>
-              <span style={valueStyle}>{item.population || 'Unknown'}</span>
+            <div className="mb-3 py-2 fw-bold me-2" style={detailStyle}>
+              <span className="text-warning" style={labelStyle}>Population:</span>
+              <span className="text-white" style={valueStyle}>{item.population || 'Unknown'}</span>
             </div>
           </div>
         </div>
@@ -109,31 +105,31 @@ export const CardView = () => {
       return (
         <div className="row">
           <div className="col-lg-6">
-            <div style={detailStyle}>
-              <span style={labelStyle}>Model:</span>
-              <span style={valueStyle}>{item.model}</span>
+            <div className="mb-3 py-2 fw-bold me-2" style={detailStyle}>
+              <span className="text-warning" style={labelStyle}>Model:</span>
+              <span className="text-white" style={valueStyle}>{item.model}</span>
             </div>
-            <div style={detailStyle}>
-              <span style={labelStyle}>Manufacturer:</span>
-              <span style={valueStyle}>{item.manufacturer}</span>
+            <div className="mb-3 py-2 fw-bold me-2" style={detailStyle}>
+              <span className="text-warning" style={labelStyle}>Manufacturer:</span>
+              <span className="text-white" style={valueStyle}>{item.manufacturer}</span>
             </div>
-            <div style={detailStyle}>
-              <span style={labelStyle}>Length:</span>
-              <span style={valueStyle}>{item.length || 'Unknown'}</span>
+            <div className="mb-3 py-2 fw-bold me-2" style={detailStyle}>
+              <span className="text-warning" style={labelStyle}>Length:</span>
+              <span className="text-white" style={valueStyle}>{item.length || 'Unknown'}</span>
             </div>
           </div>
           <div className="col-lg-6">
-            <div style={detailStyle}>
-              <span style={labelStyle}>Crew:</span>
-              <span style={valueStyle}>{item.crew}</span>
+            <div className="mb-3 py-2 fw-bold me-2" style={detailStyle}>
+              <span className="text-warning" style={labelStyle}>Crew:</span>
+              <span className="text-white" style={valueStyle}>{item.crew}</span>
             </div>
-            <div style={detailStyle}>
-              <span style={labelStyle}>Passengers:</span>
-              <span style={valueStyle}>{item.passengers}</span>
+            <div className="mb-3 py-2 fw-bold me-2" style={detailStyle}>
+              <span className="text-warning" style={labelStyle}>Passengers:</span>
+              <span className="text-white" style={valueStyle}>{item.passengers}</span>
             </div>
-            <div style={detailStyle}>
-              <span style={labelStyle}>Cost:</span>
-              <span style={valueStyle}>{item.cost_in_credits} credits</span>
+            <div className="mb-3 py-2 fw-bold me-2" style={detailStyle}>
+              <span className="text-warning" style={labelStyle}>Cost:</span>
+              <span className="text-white" style={valueStyle}>{item.cost_in_credits} credits</span>
             </div>
           </div>
         </div>
@@ -143,13 +139,13 @@ export const CardView = () => {
       return (
         <div className="row">
           <div className="col-12">
-            <div style={detailStyle}>
-              <span style={labelStyle}>Birth Year:</span>
-              <span style={valueStyle}>{item.birthYear}</span>
+            <div className="mb-3 py-2 fw-bold me-2" style={detailStyle}>
+              <span className="text-warning" style={labelStyle}>Birth Year:</span>
+              <span className="text-white" style={valueStyle}>{item.birthYear}</span>
             </div>
-            <div style={detailStyle}>
-              <span style={labelStyle}>Gender:</span>
-              <span style={valueStyle}>{item.gender}</span>
+            <div className="mb-3 py-2 fw-bold me-2" style={detailStyle}>
+              <span className="text-warning" style={labelStyle}>Gender:</span>
+              <span className="text-white" style={valueStyle}>{item.gender}</span>
             </div>
           
           </div>
@@ -160,9 +156,7 @@ export const CardView = () => {
 
 
   return (
-    <div className="min-vh-100 d-flex flex-column" style={{ 
-      position: 'relative'
-    }}>
+    <div className="min-vh-100 d-flex flex-column position-relative">
       <div className="container-fluid flex-grow-1 d-flex align-items-center py-2" style={{ zIndex: 1 }}>
         <div className="row w-100 justify-content-center align-items-center" style={{ minHeight: '95vh' }}>
           <div className="col-12 col-xl-11 col-xxl-10">
@@ -174,8 +168,8 @@ export const CardView = () => {
               boxShadow: '0 0 30px rgba(255, 215, 0, 0.3), inset 0 0 30px rgba(255, 215, 0, 0.1)'
             }}>
               <div className="row g-0" style={{ minHeight: '300px' }}>
-                <div className="col-lg-5 d-flex align-items-center justify-content-center ">
-                  <div className="position-relative w-100" style={{ maxWidth: '450px' }}>
+                <div className="col-lg-5 d-flex align-items-center justify-content-center">
+                  <div className="position-relative w-100 mw-100" style={{ maxWidth: '450px' }}>
                     <img 
                       src={item.image_url || rigoImageUrl} 
                       className="img-fluid rounded shadow-lg w-100" 
@@ -207,39 +201,30 @@ export const CardView = () => {
                 </div>
                 <div className="col-lg-7 d-flex align-items-center">
                   <div className="card-body ">
-                    <h1 className="card-title mb-3" style={{ 
-                      fontSize: '2rem', 
-                      fontWeight: 'bold',
+                    <h1 className="card-title mb-3 fs-1 fw-bold text-warning" style={{ 
                       textShadow: '0 0 15px #ffd700, 0 0 30px #ffd700',
                       background: 'linear-gradient(45deg, #ffd700, #ffed4a)',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       fontFamily: '"Star Wars", "Arial Black", sans-serif',
-                      letterSpacing: '1px',
-                      whiteSpace: 'nowrap',
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis'
+                      letterSpacing: '1px'
                     }}>
                       {item.name}
                     </h1>
                     
-                    <p className="card-text mb-3" style={{
-                      fontSize: '1.1rem',
-                      lineHeight: '1.5',
-                      color: '#e0e0e0',
+                    <p className="card-text mb-3 fs-5 lh-base text-light" style={{
                       textShadow: '0 0 5px rgba(255, 255, 255, 0.3)'
                     }}>
                       {item.description}
                     </p>
                     
-                    <hr style={{ 
+                    <hr className="my-4" style={{ 
                       border: 'none', 
                       height: '2px', 
-                      background: 'linear-gradient(90deg, transparent, #ffd700, transparent)',
-                      margin: '1.5rem 0'
+                      background: 'linear-gradient(90deg, transparent, #ffd700, transparent)'
                     }} />
 
-                    <div style={{ fontSize: '1rem' }}>
+                    <div className="fs-6">
                       {renderDetails()}
                     </div>
                     

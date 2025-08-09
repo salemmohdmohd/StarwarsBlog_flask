@@ -36,14 +36,14 @@ function Cards({ item }) {
   };
 
   return (
-    <div className="card bg-secondary text-white border-light shadow" style={{width: "18rem", borderWidth: "2px"}}>
+    <div className="card bg-secondary text-white border-light shadow border-2" style={{width: "18rem"}}>
       <div className="card-header bg-black">
         <h5 className="card-title mb-0 text-center">{item.name}</h5>
       </div>
       <img
         src={item.image_url || rigoImageUrl}
-        className="card-img-top"
-        style={{ height: "10rem", borderWidth: "2px", borderStyle: "solid", borderColor: "#333", filter: item.image_url ? "none" : "brightness(0.5)" }}
+        className="card-img-top border-2 border-dark"
+        style={{ height: "10rem", filter: item.image_url ? "none" : "brightness(0.5)" }}
         alt={item.name}
         onError={(e) => {
           e.target.src = rigoImageUrl;
@@ -62,10 +62,10 @@ function Cards({ item }) {
           </p>
         )}
         <div className="d-flex justify-content-between text-white">
-          <Link to={`/${item.type === "planet" ? "planet" : item.type === "vehicle" ? "vehicle" : "character"}/${item.uid}`} className="btn btn-black btn-sm text-white">
+          <Link to={`/${item.type === "planet" ? "planet" : item.type === "vehicle" ? "vehicle" : "character"}/${item.uid}`} className="btn btn-dark btn-sm text-white">
             ...
           </Link>
-          <button s
+          <button 
             className={`btn btn-sm ${isInFavorites ? 'btn-warning' : 'btn-outline-warning'}`}
             onClick={handleFavorite}
           >

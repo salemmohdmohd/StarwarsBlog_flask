@@ -39,13 +39,10 @@ const Login = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center min-vh-100" style={{
-      position: 'relative'
-    }}>
-      <div className={`bg-black rounded-3 p-4 w-100 border border-light ${animationClass}`}
+    <div className="d-flex justify-content-center align-items-center min-vh-100 position-relative">
+      <div className={`bg-black rounded-3 p-4 w-100 border border-light position-relative ${animationClass}`}
            style={{ 
              maxWidth: '400px',
-             position: 'relative',
              zIndex: 3,
              backgroundColor: 'rgba(0, 0, 0, 0.85)',
              backdropFilter: 'blur(5px)',

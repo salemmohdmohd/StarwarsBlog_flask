@@ -57,19 +57,9 @@ export const Layout = () => {
     }
 
     return (
-        <div style={{
-            background: '#000000',
-            position: 'relative',
-            minHeight: '100vh',
-            overflow: 'hidden'
-        }}>
+        <div className="bg-black position-relative min-vh-100 overflow-hidden">
             {/* Static colorful stars background */}
-            <div style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
+            <div className="position-fixed top-0 start-0 end-0 bottom-0" style={{
                 backgroundImage: `
                     radial-gradient(1px 1px at 10% 20%, #00ffff, transparent),
                     radial-gradient(1px 1px at 25% 70%, #ff00ff, transparent),
@@ -95,12 +85,7 @@ export const Layout = () => {
             }}></div>
             
             {/* Additional static white stars layer */}
-            <div style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
+            <div className="position-fixed top-0 start-0 end-0 bottom-0" style={{
                 backgroundImage: `
                     radial-gradient(0.5px 0.5px at 20% 50%, #ffffff, transparent),
                     radial-gradient(0.5px 0.5px at 60% 30%, #ffffff, transparent),
@@ -115,7 +100,7 @@ export const Layout = () => {
                 pointerEvents: 'none'
             }}></div>
             
-            <div style={{ position: 'relative', zIndex: 1 }}>
+            <div className="position-relative" style={{ zIndex: 1 }}>
                 <Navbar user={user} onLogout={handleLogout} />
                 <Outlet />
             </div>
