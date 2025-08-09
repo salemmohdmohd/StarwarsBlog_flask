@@ -1,8 +1,126 @@
 # Star Wars Flask REST API
 
-A comprehensive Flask REST API for managing Star Wars characters, planets, and vehicles with an admin interface and image support.
+A comprehensive Flask REST API for managing Star Wars characters, planets, a## 🚀 Quick Start
 
-## 🚀 Quick Start
+### Full Stack Application
+
+```bash
+./start_fullstack.sh
+```
+
+This starts both the Flask backend and React frontend automatically.
+
+### Manual Startup
+
+````bash
+# Backend
+cd backend && python app.py
+
+# Frontend (in another terminal)
+cd frontend && npm start
+```h an admin interface and image support.
+
+## � Prerequisites
+
+Before you begin, ensure you have the following installed on your system:
+
+- **Python 3.7+** - [Download Python](https://www.python.org/downloads/)
+- **pip** - Python package manager (comes with Python)
+- **Git** - [Download Git](https://git-scm.com/downloads)
+- **Node.js & npm** - [Download Node.js](https://nodejs.org/) (for frontend)
+
+## 🔽 Step-by-Step Installation
+
+### 1. Clone the Repository
+
+```bash
+# Clone the repository
+git clone https://github.com/4GeeksAcademy/salem-flask-rest-star.git
+
+# Navigate to the project directory
+cd salem-flask-rest-star
+````
+
+### 2. Set Up Python Virtual Environment
+
+```bash
+# Create a virtual environment
+python -m venv .venv
+
+# Activate the virtual environment
+# On macOS/Linux:
+source .venv/bin/activate
+# On Windows:
+# .venv\Scripts\activate
+```
+
+### 3. Install Python Dependencies
+
+```bash
+# Install backend dependencies
+pip install -r requirements.txt
+```
+
+### 4. Install Frontend Dependencies
+
+```bash
+# Navigate to frontend directory
+cd frontend
+
+# Install npm dependencies
+npm install
+
+# Return to project root
+cd ..
+```
+
+### 5. Set Up Database
+
+```bash
+# Run database management script to initialize
+./db_manager.sh init
+
+# Add sample Star Wars data
+./db_manager.sh add-data
+
+# Create sample users
+./db_manager.sh create-users
+```
+
+### 6. Start the Application
+
+```bash
+# Option 1: Start full application (recommended)
+./start_fullstack.sh
+
+# Option 2: Manual startup (if needed)
+# Backend (terminal 1):
+cd backend && python app.py
+
+# Frontend (terminal 2):
+cd frontend && npm start
+```
+
+## 🌐 Access Your Application
+
+After successful startup, you can access:
+
+- **Frontend React App**: http://localhost:3001
+- **Backend API**: http://127.0.0.1:3000
+- **Admin Interface**: http://127.0.0.1:3000/admin/
+
+### 🔑 Test Login Credentials
+
+Use these accounts to test the application:
+
+| Email              | Password    | Character      |
+| ------------------ | ----------- | -------------- |
+| luke@jedi.com      | usetheforce | Luke Skywalker |
+| leia@rebellion.com | rebel123    | Princess Leia  |
+| vader@empire.com   | darkside    | Darth Vader    |
+| admin@starwars.com | admin123    | Admin Account  |
+
+## �🚀 Quick Start
 
 ### Option 1: Full Stack (Backend + Frontend)
 
@@ -11,28 +129,6 @@ A comprehensive Flask REST API for managing Star Wars characters, planets, and v
 ```
 
 This starts both the Flask backend and React frontend automatically.
-
-### Option 2: Backend Only
-
-```bash
-./start_server.sh
-```
-
-### Option 3: Frontend Only
-
-```bash
-./start_frontend.sh
-```
-
-### Manual Startup
-
-```bash
-# Backend
-cd backend && python3 app.py
-
-# Frontend (in another terminal)
-cd frontend && npm start
-```
 
 The applications will be available at:
 
@@ -139,16 +235,43 @@ salem-flask-rest-star/
 │   ├── routes.py           # API endpoints
 │   ├── admin.py            # Admin interface setup
 │   ├── utils.py            # Utility functions
+│   ├── add_data.py         # Sample data script
+│   ├── create_users.py     # User creation script
 │   └── instance/
 │       └── database.db     # SQLite database
-├── frontend/               # React frontend (separate)
+├── frontend/               # React frontend
+│   ├── src/                # React source code
+│   ├── index.html          # Main HTML with Death Star favicon
+│   └── death-star.svg      # Custom Star Wars favicon
 ├── instance/
 │   └── database.db        # Main database file
 ├── migrations/            # Database migrations
-├── start_server.sh        # Backend startup script
-├── start_frontend.sh      # Frontend startup script
+├── backups/               # Database backups
+├── db_manager.sh          # Database management script
+├── quick_db.sh            # Quick database operations
 ├── start_fullstack.sh     # Full stack startup script
+├── DATABASE_MANAGEMENT.md # Database management guide
 └── README.md             # This file
+```
+
+## 🛠 Database Management
+
+The project includes comprehensive database management tools:
+
+### Quick Operations
+
+```bash
+./quick_db.sh              # Interactive menu for common tasks
+./db_manager.sh help        # Full database management options
+```
+
+### Sample Commands
+
+```bash
+./db_manager.sh add-data    # Add Star Wars sample data
+./db_manager.sh create-users # Create test users
+./db_manager.sh list-users  # View all users
+./db_manager.sh backup      # Create database backup
 ```
 
 ## 🎬 Startup Scripts
@@ -161,44 +284,16 @@ Starts both backend and frontend servers simultaneously:
 - Starts Flask backend on port 3000
 - Starts React frontend on port 3001
 - Handles graceful shutdown with Ctrl+C
-- Perfect for full development environment
-
-### 🚀 `start_server.sh` - Backend Only
-
-Starts only the Flask backend server:
-
-- Navigates to backend directory automatically
-- Validates app.py exists
-- Provides helpful startup messages
-- Shows admin panel URL
-
-### ⚛️ `start_frontend.sh` - Frontend Only
-
-Starts only the React development server:
-
-- Navigates to frontend directory automatically
-- Installs npm dependencies if missing
-- Starts on port 3001 (avoids backend port conflict)
-- Reminds you to start backend separately
 
 ## 🔧 Development
 
-### Prerequisites
+This application includes all the tools you need for development:
 
-- Python 3.7+
-- pip (Python package manager)
-
-### Installation
-
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Run the startup script:
-   ```bash
-   ./start_server.sh
-   ```
+- **Automatic Setup**: Step-by-step installation guide above
+- **Database Management**: Built-in scripts for data and user management
+- **Hot Reload**: Frontend development server with live updates
+- **Admin Interface**: Web-based database management
+- **Sample Data**: Pre-built Star Wars characters, planets, and vehicles
 
 ### Key Dependencies
 

@@ -37,6 +37,9 @@ function Cards({ item }) {
 
   return (
     <div className="card bg-secondary text-white border-light shadow" style={{width: "18rem", borderWidth: "2px"}}>
+      <div className="card-header bg-black">
+        <h5 className="card-title mb-0 text-center">{item.name}</h5>
+      </div>
       <img
         src={item.image_url || rigoImageUrl}
         className="card-img-top"
@@ -47,8 +50,7 @@ function Cards({ item }) {
           e.target.style.filter = "brightness(0.5)";
         }}
       />
-      <div className="card-body">
-        <h5 className="card-title">{item.name}</h5>
+      <div className="card-body bg-black">
         {item.type === "planet" ? (
           <p className="card-text">
             {/* <small className="text-muted">Climate: {item.climate}</small><br />
@@ -59,11 +61,11 @@ function Cards({ item }) {
             {/* <small className="text-muted">Gender: {item.gender}</small><br /> */}
           </p>
         )}
-        <div className="d-flex justify-content-between">
-          <Link to={`/${item.type === "planet" ? "planet" : item.type === "vehicle" ? "vehicle" : "character"}/${item.uid}`} className="btn btn-dark btn-sm">
-            more...
+        <div className="d-flex justify-content-between text-white">
+          <Link to={`/${item.type === "planet" ? "planet" : item.type === "vehicle" ? "vehicle" : "character"}/${item.uid}`} className="btn btn-black btn-sm text-white">
+            ...
           </Link>
-          <button 
+          <button s
             className={`btn btn-sm ${isInFavorites ? 'btn-warning' : 'btn-outline-warning'}`}
             onClick={handleFavorite}
           >

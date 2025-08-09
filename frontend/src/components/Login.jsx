@@ -1,21 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { loginUser } from '../data/starWarsData.jsx';
+import useGlobalReducer from '../hooks/useGlobalReducer.jsx';
 
 const Login = ({ onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [animationClass, setAnimationClass] = useState('');
-  const audioRef = useRef(null);
+  const { dispatch } = useGlobalReducer();
 
   useEffect(() => {
     // Play theme song on component load
-    if (audioRef.current) {
-      audioRef.current.play().catch(error => {
-        console.log('Audio autoplay prevented:', error);
-      });
-    }
-  }, []);
+    dispatch({
+      type: "play_audio",
+      payload: "https://ia600304.us.archive.org/30/items/StarWarsTheImperialMarchDarthVadersTheme/Star%20Wars-%20The%20Imperial%20March%20(Darth%20Vader's%20Theme).mp3"
+    });
+  }, [dispatch]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,10 +39,17 @@ const Login = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center min-vh-100" >
+    <div className="d-flex justify-content-center align-items-center min-vh-100" style={{
+      position: 'relative'
+    }}>
       <div className={`bg-black rounded-3 p-4 w-100 border border-light ${animationClass}`}
            style={{ 
              maxWidth: '400px',
+             position: 'relative',
+             zIndex: 3,
+             backgroundColor: 'rgba(0, 0, 0, 0.85)',
+             backdropFilter: 'blur(5px)',
+             boxShadow: '0 0 30px rgba(255, 255, 255, 0.1)'
            }}>
         <h2 className="text-center text-white mb-4">
           Login to Star Wars Blog
@@ -96,13 +103,6 @@ const Login = ({ onLoginSuccess }) => {
           pass: 123456
         </p>
         </form>
-        
-        <audio 
-          ref={audioRef}
-          src="https://ia600304.us.archive.org/30/items/StarWarsTheImperialMarchDarthVadersTheme/Star%20Wars-%20The%20Imperial%20March%20(Darth%20Vader's%20Theme).mp3"
-          preload="auto"
-          loop
-        />
       </div>
     </div>
   );
