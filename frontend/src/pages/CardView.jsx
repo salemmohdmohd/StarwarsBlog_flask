@@ -120,10 +120,17 @@ export const CardView = () => {
             <div className="row g-0">
               <div className="col-md-4">
                 <img 
-                  src={rigoImageUrl} 
+                  src={item.image_url || rigoImageUrl} 
                   className="img-fluid rounded-start h-40" 
                   alt={item.name}
-                  style={{ objectFit: "cover" }}
+                  style={{ 
+                    objectFit: "cover",
+                    filter: item.image_url ? "none" : "brightness(0.5)"
+                  }}
+                  onError={(e) => {
+                    e.target.src = rigoImageUrl;
+                    e.target.style.filter = "brightness(0.5)";
+                  }}
                 />
               </div>
               <div className="col-md-8">

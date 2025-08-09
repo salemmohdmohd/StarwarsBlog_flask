@@ -2,15 +2,13 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
-db_url = os.getenv("DATABASE_URL")
-
 from flask import Flask, jsonify
 from flask_migrate import Migrate
 from flask_cors import CORS
-from backend.utils import APIException, generate_sitemap
-from backend.admin import setup_admin
-from backend.models import db
-from backend.routes import register_routes
+from utils import APIException, generate_sitemap
+from admin import setup_admin
+from models import db
+from routes import register_routes
 
 def create_app():
     app = Flask(__name__)
@@ -19,11 +17,8 @@ def create_app():
     # Session configuration
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
 
-    db_url = os.getenv("DATABASE_URL")
-    if db_url is not None:
-        app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace("postgres://", "postgresql://")
-    else:
-        app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
+    # Simple SQLite database configuration
+    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////Users/salemmohd/Documents/GitHub/salem-flask-rest-star/instance/database.db"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)

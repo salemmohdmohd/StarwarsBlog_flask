@@ -1,0 +1,187 @@
+/* Custom Border Styles for Star Wars App */
+
+/* Override all Bootstrap border utilities */
+.border,
+.border-top,
+.border-end,
+.border-bottom,
+.border-start,
+.border-light,
+.border-secondary,
+.border-danger {
+  border-color: var(--primary-border-color) !important;
+  border-width: var(--normal-border) !important;
+  border-style: solid !important;
+}
+
+/* Card borders */
+.card {
+  border: var(--normal-border) solid var(--primary-border-color) !important;
+  border-radius: var(--normal-radius) !important;
+}
+
+/* Form control borders */
+.form-control {
+  border: var(--normal-border) solid var(--primary-border-color) !important;
+  border-radius: var(--normal-radius) !important;
+}
+
+.form-control:focus {
+  border-color: var(--accent-border-color) !important;
+  box-shadow: 0 0 0 0.2rem var(--glow-color) !important;
+}
+
+/* Button borders */
+.btn {
+  border: var(--normal-border) solid var(--primary-border-color) !important;
+  border-radius: var(--normal-radius) !important;
+}
+
+.btn-primary {
+  border-color: var(--primary-border-color) !important;
+  background-color: var(--glow-color) !important;
+}
+
+.btn-primary:hover {
+  border-color: var(--accent-border-color) !important;
+  background-color: var(--glow-color) !important;
+  opacity: 0.8;
+}
+
+/* Navbar borders */
+.navbar {
+  border-bottom: var(--thick-border) solid var(--primary-border-color) !important;
+}
+
+/* Alert borders */
+.alert {
+  border: var(--normal-border) solid var(--primary-border-color) !important;
+  border-radius: var(--normal-radius) !important;
+}
+
+.alert-danger {
+  border-color: var(--error-border-color) !important;
+}
+
+/* Image borders */
+img {
+  border: var(--normal-border) solid var(--primary-border-color) !important;
+  border-radius: var(--normal-radius) !important;
+}
+
+/* Custom border utilities */
+.border-gold {
+  border: var(--normal-border) solid var(--primary-border-color) !important;
+}
+
+.border-gold-thick {
+  border: var(--extra-thick-border) solid var(--primary-border-color) !important;
+}
+
+.border-gold-thin {
+  border: var(--thin-border) solid var(--primary-border-color) !important;
+}
+
+.border-sith {
+  border: var(--normal-border) solid var(--error-border-color) !important;
+}
+
+.border-jedi {
+  border: var(--normal-border) solid #0066ff !important;
+}
+
+/* Rounded border variations */
+.border-rounded {
+  border-radius: var(--large-radius) !important;
+}
+
+.border-rounded-lg {
+  border-radius: 20px !important;
+}
+
+.border-rounded-xl {
+  border-radius: var(--xl-radius) !important;
+}
+
+/* Border opacity overrides */
+.border-opacity-25 {
+  border-color: var(--glow-color) !important;
+  opacity: 0.25;
+}
+
+.border-opacity-50 {
+  border-color: var(--glow-color) !important;
+  opacity: 0.5;
+}
+
+.border-opacity-75 {
+  border-color: var(--glow-color) !important;
+  opacity: 0.75;
+}
+
+/* Animated borders for special effects */
+.border-glow {
+  border: var(--normal-border) solid var(--primary-border-color) !important;
+  box-shadow: 0 0 var(--glow-size) var(--glow-color) !important;
+  animation: borderGlow 2s infinite alternate;
+}
+
+@keyframes borderGlow {
+  from {
+    box-shadow: 0 0 5px var(--glow-color);
+  }
+  to {
+    box-shadow: 0 0 15px var(--glow-color);
+  }
+}
+
+/* Lightsaber effect border */
+.border-lightsaber {
+  border: var(--thick-border) solid var(--success-border-color) !important;
+  box-shadow: 
+    0 0 5px var(--success-border-color),
+    0 0 10px var(--success-border-color),
+    0 0 15px var(--success-border-color) !important;
+}
+
+.border-lightsaber-blue {
+  border: var(--thick-border) solid #0066ff !important;
+  box-shadow: 
+    0 0 5px #0066ff,
+    0 0 10px #0066ff,
+    0 0 15px #0066ff !important;
+}
+
+.border-lightsaber-red {
+  border: var(--thick-border) solid var(--error-border-color) !important;
+  box-shadow: 
+    0 0 5px var(--error-border-color),
+    0 0 10px var(--error-border-color),
+    0 0 15px var(--error-border-color) !important;
+}
+
+/* Responsive border adjustments */
+@media (max-width: 768px) {
+  .border,
+  .card,
+  .form-control,
+  .btn {
+    border-width: var(--thin-border) !important;
+  }
+  
+  .border-gold-thick {
+    border-width: var(--normal-border) !important;
+  }
+}
+
+/* Hover effects */
+.card:hover {
+  border-color: var(--accent-border-color) !important;
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  border-color: var(--accent-border-color) !important;
+  transition: all 0.3s ease;
+}

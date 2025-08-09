@@ -38,10 +38,14 @@ function Cards({ item }) {
   return (
     <div className="card bg-secondary text-white border-light shadow" style={{width: "18rem", borderWidth: "2px"}}>
       <img
-        src={rigoImageUrl}
+        src={item.image_url || rigoImageUrl}
         className="card-img-top"
-        style={{ height: "10rem", borderWidth: "2px", borderStyle: "solid", borderColor: "#333", filter: "brightness(0.5)" }}
+        style={{ height: "10rem", borderWidth: "2px", borderStyle: "solid", borderColor: "#333", filter: item.image_url ? "none" : "brightness(0.5)" }}
         alt={item.name}
+        onError={(e) => {
+          e.target.src = rigoImageUrl;
+          e.target.style.filter = "brightness(0.5)";
+        }}
       />
       <div className="card-body">
         <h5 className="card-title">{item.name}</h5>

@@ -8,7 +8,6 @@ import useGlobalReducer from "../hooks/useGlobalReducer"
 // Base component that maintains the navbar throughout the page.
 export const Layout = () => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
     const { dispatch } = useGlobalReducer();
 
     useEffect(() => {
@@ -32,8 +31,6 @@ export const Layout = () => {
             }
         } catch (error) {
             console.error('Auth check failed:', error);
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -54,21 +51,6 @@ export const Layout = () => {
         // Clear favorites when logging out
         dispatch({ type: "set_favorites", payload: [] });
     };
-
-    if (loading) {
-        return (
-            <div style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                minHeight: '100vh',
-                background: 'linear-gradient(135deg, #1a1a2e, #16213e, #0f1419)',
-                color: '#fff'
-            }}>
-                <h2>Loading...</h2>
-            </div>
-        );
-    }
 
     if (!user) {
         return <Login onLoginSuccess={handleLoginSuccess} />;

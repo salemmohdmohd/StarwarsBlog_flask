@@ -26,30 +26,6 @@ export const loginUser = async (email, password) => {
   }
 };
 
-export const registerUser = async (email, password) => {
-  try {
-    const response = await fetch(`${BASE_URL}/auth/register`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include', // Include cookies for session
-      body: JSON.stringify({ email, password })
-    });
-    
-    const data = await response.json();
-    
-    if (!response.ok) {
-      throw new Error(data.msg || 'Registration failed');
-    }
-    
-    return data;
-  } catch (error) {
-    console.error('Registration error:', error);
-    throw error;
-  }
-};
-
 export const logoutUser = async () => {
   try {
     const response = await fetch(`${BASE_URL}/auth/logout`, {
@@ -92,6 +68,7 @@ export const fetchVehicles = async () => {
       name: vehicle.name,
       model: vehicle.model,
       manufacturer: vehicle.manufacturer,
+      image_url: vehicle.image_url,
       type: "vehicle"
     }));
   } catch (error) {
@@ -110,6 +87,7 @@ export const fetchPeople = async () => {
       name: person.name,
       gender: person.gender,
       birthYear: person.birth_year,
+      image_url: person.image_url,
       type: "character"
     }));
   } catch (error) {
@@ -128,6 +106,7 @@ export const fetchPlanets = async () => {
       name: planet.name,
       climate: planet.climate,
       population: planet.population,
+      image_url: planet.image_url,
       type: "planet"
     }));
   } catch (error) {
@@ -168,6 +147,7 @@ export const getFavorites = async () => {
           name: fav.people.name,
           gender: fav.people.gender,
           birthYear: fav.people.birth_year,
+          image_url: fav.people.image_url,
           type: "character"
         };
       } else if (fav.planet) {
@@ -177,6 +157,7 @@ export const getFavorites = async () => {
           name: fav.planet.name,
           climate: fav.planet.climate,
           population: fav.planet.population,
+          image_url: fav.planet.image_url,
           type: "planet"
         };
       } else if (fav.vehicle) {
@@ -186,6 +167,7 @@ export const getFavorites = async () => {
           name: fav.vehicle.name,
           model: fav.vehicle.model,
           manufacturer: fav.vehicle.manufacturer,
+          image_url: fav.vehicle.image_url,
           type: "vehicle"
         };
       }

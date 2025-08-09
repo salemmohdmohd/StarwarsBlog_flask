@@ -23,6 +23,7 @@ class People(db.Model):
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     gender: Mapped[str] = mapped_column(String(20))
     birth_year: Mapped[str] = mapped_column(String(20))
+    image_url: Mapped[str] = mapped_column(String(500), nullable=True)
 
     def serialize(self):
         return {
@@ -30,6 +31,7 @@ class People(db.Model):
             "name": self.name,
             "gender": self.gender,
             "birth_year": self.birth_year,
+            "image_url": self.image_url,
         }
 
 class Planet(db.Model):
@@ -37,6 +39,7 @@ class Planet(db.Model):
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     climate: Mapped[str] = mapped_column(String(120))
     population: Mapped[str] = mapped_column(String(120))
+    image_url: Mapped[str] = mapped_column(String(500), nullable=True)
 
     def serialize(self):
         return {
@@ -44,6 +47,7 @@ class Planet(db.Model):
             "name": self.name,
             "climate": self.climate,
             "population": self.population,
+            "image_url": self.image_url,
         }
 
 class Vehicle(db.Model):
@@ -51,6 +55,7 @@ class Vehicle(db.Model):
     name: Mapped[str] = mapped_column(String(120), nullable=False)
     model: Mapped[str] = mapped_column(String(120))
     manufacturer: Mapped[str] = mapped_column(String(120))
+    image_url: Mapped[str] = mapped_column(String(500), nullable=True)
 
     def serialize(self):
         return {
@@ -58,6 +63,7 @@ class Vehicle(db.Model):
             "name": self.name,
             "model": self.model,
             "manufacturer": self.manufacturer,
+            "image_url": self.image_url,
         }
 
 class Favorite(db.Model):
