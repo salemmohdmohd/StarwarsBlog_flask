@@ -9,8 +9,8 @@ verify_ssl = true
 flask = "*"
 sqlalchemy = "*"
 flask-sqlalchemy = "*"
-flask-migrate = "==4.0.5"
-flask-swagger = "==0.2.14"
+flask-migrate = "*"
+flask-swagger = "*"
 psycopg2-binary = "*"
 python-dotenv = "==1.0.0"
 mysqlclient = "==2.2.0"
@@ -19,6 +19,7 @@ gunicorn = "*"
 flask-admin = "==1.6.1"
 wtforms = "==3.0.1"
 eralchemy2 = "*"
+pygraphviz = "*"
 
 [requires]
 python_version = "3.13"
