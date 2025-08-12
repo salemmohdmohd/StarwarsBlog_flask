@@ -45,7 +45,7 @@ export const logoutUser = async () => {
 
 export const getCurrentUser = async () => {
   try {
-    const response = await fetch(`${BASE_URL}/auth/me`, {
+    const response = await fetch(`${BASE_URL}/protected`, {
       headers: {
         ...authHeader(),
         'Content-Type': 'application/json',
