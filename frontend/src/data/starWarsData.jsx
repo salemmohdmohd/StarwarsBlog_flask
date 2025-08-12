@@ -195,6 +195,7 @@ export const addFavorite = async (type, id) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        ...authHeader()
       },
       credentials: 'include'
     });
@@ -223,6 +224,9 @@ export const removeFavorite = async (type, id) => {
     const backendType = typeMap[type] || type;
     const res = await fetch(`/api/favorite/${backendType}/${id}`, {
       method: "DELETE",
+      headers: {
+        ...authHeader()
+      },
       credentials: 'include'
     });
     

@@ -119,10 +119,68 @@ show_current() {
 add_sample_data() {
     print_header "Adding Sample Star Wars Data"
     cd "$BACKEND_DIR"
-    
-    print_status "Running add_data.py script..."
-    $VENV_PYTHON add_data.py
-    
+
+    cat > bulk_seed.py << 'EOF'
+#!/usr/bin/env python3
+
+from app import create_app
+from models import db, People, Planet, Vehicle
+
+def seed_data():
+    app = create_app()
+    with app.app_context():
+        # People (Characters)
+        new_people = [
+            {"name": "Mace Windu", "gender": "male", "birth_year": "72BBY", "image_url": "https://upload.wikimedia.org/wikipedia/en/6/66/Mace_Windu.png"},
+            {"name": "Count Dooku", "gender": "male", "birth_year": "102BBY", "image_url": "https://upload.wikimedia.org/wikipedia/en/6/6f/Count_Dooku_Dooku.png"},
+            {"name": "General Grievous", "gender": "male", "birth_year": "unknown", "image_url": "https://upload.wikimedia.org/wikipedia/en/6/6b/General_Grievous.png"},
+            {"name": "Jango Fett", "gender": "male", "birth_year": "66BBY", "image_url": "https://upload.wikimedia.org/wikipedia/en/5/5e/Jango_Fett.png"},
+            {"name": "Ahsoka Tano", "gender": "female", "birth_year": "36BBY", "image_url": "https://upload.wikimedia.org/wikipedia/en/7/7e/Ahsoka_Tano.png"}
+        ]
+        # Planets
+        new_planets = [
+            {"name": "Coruscant", "climate": "temperate", "population": "1000000000000", "image_url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Coruscant.png"},
+            {"name": "Kamino", "climate": "temperate", "population": "1000000000", "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Kamino.png"},
+            {"name": "Geonosis", "climate": "temperate, arid", "population": "100000000000", "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Geonosis.png"},
+            {"name": "Mustafar", "climate": "hot", "population": "20000", "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Mustafar.png"},
+            {"name": "Kashyyyk", "climate": "tropical", "population": "45000000", "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Kashyyyk.png"}
+        ]
+        # Vehicles
+        new_vehicles = [
+            {"name": "Republic Attack Cruiser", "model": "Venator-class Star Destroyer", "manufacturer": "Kuat Drive Yards", "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/2a/Venator_class_star_destroyer.png"},
+            {"name": "Jedi Interceptor", "model": "Eta-2 Actis-class light interceptor", "manufacturer": "Kuat Systems Engineering", "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Eta-2_Actis-class_light_interceptor.png"},
+            {"name": "Trade Federation Landing Ship", "model": "C-9979 landing craft", "manufacturer": "Haor Chall Engineering", "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/C-9979_landing_craft.png"},
+            {"name": "Droid Control Ship", "model": "Lucrehulk-class Droid Control Ship", "manufacturer": "Hoersch-Kessel Drive, Inc.", "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Lucrehulk-class_Battleship.png"},
+            {"name": "Naboo Royal Starship", "model": "J-type 327 Nubian royal starship", "manufacturer": "Theed Palace Space Vessel Engineering Corps", "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Naboo_Royal_Starship.png"}
+        ]
+
+        # Insert People
+        for c in new_people:
+            if not People.query.filter_by(name=c["name"]).first():
+                db.session.add(People(**c))
+        # Insert Planets
+        for p in new_planets:
+            if not Planet.query.filter_by(name=p["name"]).first():
+                db.session.add(Planet(**p))
+        # Insert Vehicles
+        for v in new_vehicles:
+            if not Vehicle.query.filter_by(name=v["name"]).first():
+                db.session.add(Vehicle(**v))
+
+        try:
+            db.session.commit()
+            print("\n🎉 Successfully seeded Star Wars data!")
+        except Exception as e:
+            db.session.rollback()
+            print(f"❌ Error seeding data: {e}")
+
+if __name__ == "__main__":
+    seed_data()
+EOF
+
+    print_status "Seeding Star Wars data..."
+    $VENV_PYTHON bulk_seed.py
+    rm bulk_seed.py
     print_success "Sample data added successfully!"
 }
 
@@ -130,12 +188,14 @@ create_users() {
     print_header "Creating Sample Users"
     cd "$BACKEND_DIR"
     
+
     cat > bulk_users.py << 'EOF'
 #!/usr/bin/env python3
 
 from app import create_app
 from models import db, User
 from werkzeug.security import generate_password_hash
+from datetime import datetime
 
 def create_sample_users():
     """Create sample users for testing"""
@@ -144,14 +204,8 @@ def create_sample_users():
     with app.app_context():
         
         sample_users = [
-            {"email": "luke@jedi.com", "password": "usetheforce"},
-            {"email": "leia@rebellion.com", "password": "rebel123"},
-            {"email": "han@smuggler.com", "password": "falcon123"},
-            {"email": "vader@empire.com", "password": "darkside"},
-            {"email": "obi-wan@jedi.com", "password": "highground"},
-            {"email": "yoda@jedi.com", "password": "master900"},
             {"email": "admin@starwars.com", "password": "admin123"},
-            {"email": "test@example.com", "password": "test123"}
+            {"email": "1@1.com", "password": "1234567890"}
         ]
         
         print("Creating sample users...")
@@ -164,7 +218,8 @@ def create_sample_users():
                 user = User(
                     email=user_data["email"],
                     password=generate_password_hash(user_data["password"]),
-                    is_active=True
+                    is_active=True,
+                    created_at=datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")
                 )
                 db.session.add(user)
                 created_count += 1

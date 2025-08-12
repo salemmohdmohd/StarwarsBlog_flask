@@ -114,9 +114,9 @@ cd frontend && npm start
 
 After successful startup, you can access:
 
-- **Frontend React App**: http://localhost:3001
-- **Backend API**: http://127.0.0.1:3000
-- **Admin Interface**: http://127.0.0.1:3000/admin/
+- **Frontend React App**: http://localhost:3000
+- **Backend API**: http://127.0.0.1:5000
+- **Admin Interface**: http://127.0.0.1:5000/admin/
 
 ### 🔑 Test Login Credentials
 
@@ -141,9 +141,9 @@ This starts both the Flask backend and React frontend automatically.
 
 The applications will be available at:
 
-- **Backend API**: http://127.0.0.1:3000
-- **Admin Interface**: http://127.0.0.1:3000/admin/
-- **Frontend React App**: http://localhost:3001
+- **Backend API**: http://127.0.0.1:5000
+- **Admin Interface**: http://127.0.0.1:5000/admin/
+- **Frontend React App**: http://localhost:3000
 
 ## ✨ Features
 
@@ -289,7 +289,7 @@ The project includes comprehensive database management tools:
 Starts both backend and frontend servers simultaneously:
 
 - Automatically installs npm dependencies if needed
-- Starts Flask backend on port 3000
+- Starts Flask backend on port 5000
 - Starts React frontend on port 3001
 - Handles graceful shutdown with Ctrl+C
 

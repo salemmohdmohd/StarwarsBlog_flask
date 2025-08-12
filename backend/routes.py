@@ -26,7 +26,7 @@ def signup():
     )
     db.session.add(user)
     db.session.commit()
-    access_token = create_access_token(identity=user.id)
+    access_token = create_access_token(identity=str(user.id))
     return (
         jsonify(
             {
@@ -108,7 +108,7 @@ def login():
         return jsonify({"message": "Invalid credentials"}), 401
     if not user.is_active:
         return jsonify({"message": "Account is deactivated"}), 403
-    access_token = create_access_token(identity=user.id)
+    access_token = create_access_token(identity=str(user.id))
     return jsonify({"access_token": access_token, "user": user.serialize()}), 200
 
 

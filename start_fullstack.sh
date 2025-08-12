@@ -16,7 +16,7 @@ start_backend() {
     fi
     python3 app.py &
     BACKEND_PID=$!
-    echo "✅ Backend started (PID: $BACKEND_PID) at http://127.0.0.1:3000"
+    echo "✅ Backend started (PID: $BACKEND_PID) at http://127.0.0.1:5000"
     cd ..
 }
 
@@ -37,7 +37,7 @@ start_frontend() {
     
     npm start &
     FRONTEND_PID=$!
-    echo "✅ Frontend started (PID: $FRONTEND_PID) at http://localhost:3001"
+    echo "✅ Frontend started (PID: $FRONTEND_PID) at http://localhost:3000"
     cd ..
 }
 
@@ -67,9 +67,9 @@ start_frontend
 
 echo ""
 echo "🌐 Application URLs:"
-echo "   - Backend API: http://127.0.0.1:3000"
-echo "   - Admin Panel: http://127.0.0.1:3000/admin/"
-echo "   - Frontend:    http://localhost:3001"
+echo "   - Backend API: http://127.0.0.1:5000"
+echo "   - Admin Panel: http://127.0.0.1:5000/admin/"
+echo "   - Frontend:    http://localhost:3000"
 echo ""
 echo "Press Ctrl+C to stop both servers"
 echo "May the Force be with you! 🌟"

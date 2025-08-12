@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginUser } from '../data/starWarsData.jsx';
+import { getFavorites, loginUser } from '../data/starWarsData.jsx';
 import useGlobalReducer from '../hooks/useGlobalReducer.jsx';
 
 const Login = () => {
@@ -27,9 +27,17 @@ const Login = () => {
       const response = await loginUser(email, password);
       console.log('Login success:', response);
 
+
       // Save user to global state
       if (response.user) {
         dispatch({ type: "set_user", payload: response.user });
+        // Fetch and set favorites after login
+        try {
+          const favorites = await getFavorites();
+          dispatch({ type: "set_favorites", payload: favorites });
+        } catch (favErr) {
+          console.error("Failed to fetch favorites after login", favErr);
+        }
       }
 
       // Trigger exit animation before redirect
@@ -90,7 +98,7 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              placeholder="123456"
+              placeholder="1234567890"
             />
           </div>
 
@@ -100,12 +108,6 @@ const Login = () => {
           >
             Login
           </button>
-          <p className="text-center text-white mb-4">
-            To sign up, please contact the admin and pay a small fee of 1b.<br/>
-            Test;<br/>
-            user: 1@1.com<br/>
-            pass: 123456
-          </p>
           <p className="text-center">
             <Link to="/signup" className="text-info">Don't have an account? Sign up here</Link>
           </p>

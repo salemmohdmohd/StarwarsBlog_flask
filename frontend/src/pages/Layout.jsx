@@ -1,11 +1,33 @@
+import { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Login from "../components/Login";
 import { Navbar } from "../components/Navbar";
+import { getCurrentUser, getFavorites, removeToken } from "../data/starWarsData.jsx";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 
 // Base component that maintains the navbar throughout the page.
 export const Layout = () => {
-    const { store } = useGlobalReducer();
+    const { store, dispatch } = useGlobalReducer();
+    // On app load, if user is authenticated, fetch favorites
+    useEffect(() => {
+        if (store.user) {
+            getFavorites().then(favorites => {
+                dispatch({ type: "set_favorites", payload: favorites });
+            }).catch(err => {
+                console.error("Failed to fetch favorites on app load", err);
+            });
+        }
+    }, [store.user, dispatch]);
+    // Restore user from token on app load
+    useEffect(() => {
+        if (!store.user) {
+            getCurrentUser().then(user => {
+                if (user) {
+                    dispatch({ type: "set_user", payload: user });
+                }
+            });
+        }
+    }, [store.user, dispatch]);
     const location = useLocation();
 
     // Allow unauthenticated access to /signup (and optionally /login)
@@ -15,6 +37,12 @@ export const Layout = () => {
     if (!store.user) {
         return <Login />;
     }
+
+    const handleLogout = () => {
+        removeToken();
+        dispatch({ type: "set_user", payload: null });
+        dispatch({ type: "set_favorites", payload: [] });
+    };
 
     return (
         <div className="main-container bg-black position-relative">
@@ -49,7 +77,7 @@ export const Layout = () => {
                 pointerEvents: 'none'
             }}></div>
             <div className="position-relative" style={{ zIndex: 1 }}>
-                <Navbar user={store.user} />
+                <Navbar user={store.user} onLogout={handleLogout} />
                 <Outlet />
             </div>
         </div>
