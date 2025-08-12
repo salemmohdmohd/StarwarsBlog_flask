@@ -1,5 +1,6 @@
 from flask import jsonify, url_for
 
+
 class APIException(Exception):
     status_code = 400
 
@@ -12,16 +13,18 @@ class APIException(Exception):
 
     def to_dict(self):
         rv = dict(self.payload or ())
-        rv['message'] = self.message
+        rv["message"] = self.message
         return rv
+
 
 def has_no_empty_params(rule):
     defaults = rule.defaults if rule.defaults is not None else ()
     arguments = rule.arguments if rule.arguments is not None else ()
     return len(defaults) >= len(arguments)
 
+
 def generate_sitemap(app):
-    links = ['/admin/']
+    links = ["/admin/"]
     for rule in app.url_map.iter_rules():
         # Filter out rules we can't navigate to in a browser
         # and rules that require parameters
@@ -31,9 +34,13 @@ def generate_sitemap(app):
                 links.append(url)
 
     links_html = "".join(["<li><a href='" + y + "'>" + y + "</a></li>" for y in links])
-    return """
+    return (
+        """
         <div style="text-align: center;">
         <h1>Star Wars API</h1>
         <p>API HOST: <script>document.write('<input style="padding: 5px; width: 300px" type="text" value="'+window.location.href+'" />');</script></p>
         <p>Available endpoints:</p>
-        <ul style="text-align: left;">"""+links_html+"</ul></div>"
+        <ul style="text-align: left;">"""
+        + links_html
+        + "</ul></div>"
+    )

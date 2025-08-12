@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../data/starWarsData.jsx';
 import useGlobalReducer from '../hooks/useGlobalReducer.jsx';
 
-const Login = ({ onLoginSuccess }) => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [animationClass, setAnimationClass] = useState('');
   const { dispatch } = useGlobalReducer();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Play theme song on component load
@@ -24,15 +26,20 @@ const Login = ({ onLoginSuccess }) => {
     try {
       const response = await loginUser(email, password);
       console.log('Login success:', response);
-      
-      // Trigger exit animation before login success
+
+      // Save user to global state
+      if (response.user) {
+        dispatch({ type: "set_user", payload: response.user });
+      }
+
+      // Trigger exit animation before redirect
       setAnimationClass('login-credits-exit-ultra-slow');
-      
-      // Wait for animation to complete before calling onLoginSuccess
+
+      // Wait for animation to complete before redirecting to home
       setTimeout(() => {
-        onLoginSuccess(response.user);
+        navigate("/");
       }, 12000); // 12 seconds to match ultra-slow animation duration
-      
+
     } catch (error) {
       setError(error.message);
     }
@@ -94,11 +101,14 @@ const Login = ({ onLoginSuccess }) => {
             Login
           </button>
           <p className="text-center text-white mb-4">
-          To sign up, please contact the admin and pay a small fee of 1b.
-          Test;
-          user: 1@1.com
-          pass: 123456
-        </p>
+            To sign up, please contact the admin and pay a small fee of 1b.<br/>
+            Test;<br/>
+            user: 1@1.com<br/>
+            pass: 123456
+          </p>
+          <p className="text-center">
+            <Link to="/signup" className="text-info">Don't have an account? Sign up here</Link>
+          </p>
         </form>
       </div>
     </div>

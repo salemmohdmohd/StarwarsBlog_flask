@@ -1,3 +1,12 @@
+# Backend Quick Start
+
+To start the backend server on port 5000:
+
+```bash
+./start_backend.sh
+```
+
+This will activate your virtual environment and run Flask with the correct settings for development.
 # Star Wars Flask REST API
 
 A comprehensive Flask REST API for managing Star Wars characters, planets, a## 🚀 Quick Start
@@ -45,7 +54,7 @@ cd salem-flask-rest-star
 
 ```bash
 # Create a virtual environment
-python -m venv .venv
+python3 -m venv .venv
 
 # Activate the virtual environment
 # On macOS/Linux:
@@ -58,7 +67,7 @@ source .venv/bin/activate
 
 ```bash
 # Install backend dependencies
-pip install -r requirements.txt
+pipenv install
 ```
 
 ### 4. Install Frontend Dependencies
@@ -235,8 +244,7 @@ salem-flask-rest-star/
 │   ├── routes.py           # API endpoints
 │   ├── admin.py            # Admin interface setup
 │   ├── utils.py            # Utility functions
-│   ├── add_data.py         # Sample data script
-│   ├── create_users.py     # User creation script
+│   # add_data.py and create_users.py removed; use quick_db.sh for these actions
 │   └── instance/
 │       └── database.db     # SQLite database
 ├── frontend/               # React frontend

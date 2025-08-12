@@ -1,22 +1,32 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import String, Boolean
+from sqlalchemy import Boolean, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 db = SQLAlchemy()
 
 
 class User(db.Model):
+    def __init__(self, email, password, is_active, created_at):
+        self.email = email
+        self.password = password
+        self.is_active = is_active
+        self.created_at = created_at
+
     id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
     password: Mapped[str] = mapped_column(nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean(), nullable=False)
-    favorites = db.relationship('Favorite', backref='user', lazy=True, cascade='all, delete-orphan')
+    created_at: Mapped[str] = mapped_column(String(50), nullable=False)
+    favorites = db.relationship(
+        "Favorite", backref="user", lazy=True, cascade="all, delete-orphan"
+    )
 
     def serialize(self):
         return {
             "id": self.id,
             "email": self.email,
         }
+
 
 class People(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -34,6 +44,7 @@ class People(db.Model):
             "image_url": self.image_url,
         }
 
+
 class Planet(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(120), nullable=False)
@@ -49,6 +60,7 @@ class Planet(db.Model):
             "population": self.population,
             "image_url": self.image_url,
         }
+
 
 class Vehicle(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -66,16 +78,19 @@ class Vehicle(db.Model):
             "image_url": self.image_url,
         }
 
+
 class Favorite(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    user_id: Mapped[int] = mapped_column(db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
-    people_id: Mapped[int] = mapped_column(db.ForeignKey('people.id'), nullable=True)
-    planet_id: Mapped[int] = mapped_column(db.ForeignKey('planet.id'), nullable=True)
-    vehicle_id: Mapped[int] = mapped_column(db.ForeignKey('vehicle.id'), nullable=True)
+    user_id: Mapped[int] = mapped_column(
+        db.ForeignKey("user.id", ondelete="CASCADE"), nullable=False
+    )
+    people_id: Mapped[int] = mapped_column(db.ForeignKey("people.id"), nullable=True)
+    planet_id: Mapped[int] = mapped_column(db.ForeignKey("planet.id"), nullable=True)
+    vehicle_id: Mapped[int] = mapped_column(db.ForeignKey("vehicle.id"), nullable=True)
 
-    people = db.relationship('People')
-    planet = db.relationship('Planet')
-    vehicle = db.relationship('Vehicle')
+    people = db.relationship("People")
+    planet = db.relationship("Planet")
+    vehicle = db.relationship("Vehicle")
 
     def serialize(self):
         return {

@@ -1,6 +1,18 @@
 // API functions for interacting with the backend
 const BASE_URL = '/api';
 
+// JWT token utilities
+export const saveToken = (token) => sessionStorage.setItem('token', token);
+export const getToken = () => sessionStorage.getItem('token');
+export const removeToken = () => sessionStorage.removeItem('token');
+export const isAuthenticated = () => !!getToken();
+
+// Helper to add Authorization header
+const authHeader = () => {
+  const token = getToken();
+  return token ? { Authorization: `Bearer ${token}` } : {};
+};
+
 // Authentication API functions
 export const loginUser = async (email, password) => {
   try {
@@ -9,16 +21,15 @@ export const loginUser = async (email, password) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include', // Include cookies for session
       body: JSON.stringify({ email, password })
     });
-    
     const data = await response.json();
-    
     if (!response.ok) {
-      throw new Error(data.msg || 'Login failed');
+      throw new Error(data.message || 'Login failed');
     }
-    
+    if (data.access_token) {
+      saveToken(data.access_token);
+    }
     return data;
   } catch (error) {
     console.error('Login error:', error);
@@ -27,29 +38,22 @@ export const loginUser = async (email, password) => {
 };
 
 export const logoutUser = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/auth/logout`, {
-      method: 'POST',
-      credentials: 'include',
-    });
-    
-    return await response.json();
-  } catch (error) {
-    console.error('Logout error:', error);
-    throw error;
-  }
+  removeToken();
+  // Optionally, call backend to blacklist token if implemented
+  return { message: 'Logged out' };
 };
 
 export const getCurrentUser = async () => {
   try {
     const response = await fetch(`${BASE_URL}/auth/me`, {
-      credentials: 'include',
+      headers: {
+        ...authHeader(),
+        'Content-Type': 'application/json',
+      },
     });
-    
     if (!response.ok) {
       return null; // Not authenticated
     }
-    
     const data = await response.json();
     return data.user;
   } catch (error) {
@@ -129,15 +133,12 @@ export const getStarWarsData = async () => {
 export const getFavorites = async () => {
   try {
     const res = await fetch("/api/users/favorites", {
-      credentials: 'include'
+      headers: authHeader(),
     });
-    
     if (!res.ok) {
       throw new Error('Authentication required');
     }
-    
     const backendFavorites = await res.json();
-    
     // Transform backend format to frontend format
     const frontendFavorites = backendFavorites.map(fav => {
       if (fav.people) {
@@ -173,7 +174,6 @@ export const getFavorites = async () => {
       }
       return null;
     }).filter(Boolean); // Remove any null entries
-    
     return frontendFavorites;
   } catch (error) {
     console.error("Error fetching favorites:", error);

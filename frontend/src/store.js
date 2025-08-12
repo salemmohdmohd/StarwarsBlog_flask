@@ -6,6 +6,7 @@ export const initialStore = () => {
       planets: [],
       vehicles: [],
     },
+    user: null,
     audio: {
       isPlaying: false,
       currentSong: "",
@@ -117,6 +118,12 @@ export default function storeReducer(store, action = {}) {
         },
       };
     }
+
+    case "set_user":
+      return {
+        ...store,
+        user: action.payload,
+      };
 
     default:
       throw Error("Unknown action.");
