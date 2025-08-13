@@ -8,3 +8,17 @@ dist/*
 package.json
 !.vscode
 __pycache__/
+node_modules/
+frontend/dist/
+frontend/.env
+backend/__pycache__/
+backend/.env
+*.pyc
+*.log
+backups/
+instance/
+.DS_Store
+.vscode/
+*.sqlite3
+*.db
+.github/

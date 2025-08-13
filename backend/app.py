@@ -18,6 +18,28 @@ def create_app():
     app = Flask(__name__)
     app.url_map.strict_slashes = False
 
+    # Swagger UI setup
+    from flask_swagger_ui import get_swaggerui_blueprint
+
+    SWAGGER_URL = "/swagger"
+
+    @app.route("/")
+    def index():
+        """Root route with a simple welcome message."""
+        return """
+            <h2>Welcome to the Star Wars API!</h2>
+            <ul>
+                <li><a href='/swagger'>API Documentation (Swagger UI)</a></li>
+                <li><a href='/admin'>Admin Panel</a></li>
+            </ul>
+            """
+
+    API_URL = "/static/swagger.json"
+    swaggerui_blueprint = get_swaggerui_blueprint(
+        SWAGGER_URL, API_URL, config={"app_name": "Star Wars API"}
+    )
+    app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
+
     # Session configuration
     app.config["SECRET_KEY"] = os.getenv(
         "SECRET_KEY", "dev-secret-key-change-in-production"
@@ -45,10 +67,8 @@ def create_app():
     app.register_blueprint(api_bp)
 
     @app.errorhandler(APIException)
-    def handle_invalid_usage(error):
+    def handle_api_exception(error):
         return jsonify(error.to_dict()), error.status_code
-
-    # Optionally, remove or update the root route to point to docs or a landing page
 
     return app
 
@@ -58,4 +78,4 @@ app = create_app()
 
 if __name__ == "__main__":
     PORT = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=PORT, debug=False)
+    app.run(host="0.0.0.0", port=PORT, debug=True)
