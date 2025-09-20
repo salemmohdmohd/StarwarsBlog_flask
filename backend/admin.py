@@ -5,7 +5,7 @@ from flask_admin.contrib.sqla import ModelView
 from markupsafe import Markup
 from models import Favorite, People, Planet, User, Vehicle, db
 
-
+ 
 class ImageModelView(ModelView):
     """Custom ModelView for models with image URLs"""
 

@@ -3,8 +3,7 @@
  * Edit these variables to quickly change all borders across the app
  */
 
-:root {
-  /* Main border colors */
+root{  /* Main  border colors */
   --primary-border-color: #ffd700;    /* Star Wars gold */
   --secondary-border-color: #6c757d;  /* Bootstrap secondary */
   --accent-border-color: #ffed4a;     /* Light gold for hover/focus */

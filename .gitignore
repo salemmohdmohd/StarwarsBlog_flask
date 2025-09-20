@@ -3,7 +3,7 @@
 database.database
 database.db
 diagram.png
-public/*
+public/* 
 dist/*
 package.json
 !.vscode

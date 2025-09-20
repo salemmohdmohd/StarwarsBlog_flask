@@ -2,13 +2,13 @@
 
 This guide explains how to edit and customize all borders across your Star Wars frontend application.
 
-## 📁 Files Created
+## Files Created
 
 1. **`src/styles/border-themes.css`** - Contains CSS variables for easy theme switching
 2. **`src/styles/custom-borders.css`** - Contains all border styles and overrides
 3. **`src/main.jsx`** - Updated to import the CSS files
 
-## 🎨 Quick Theme Changes
+##  Quick Theme Changes
 
 To change the entire border theme, edit `src/styles/border-themes.css`:
 
@@ -63,7 +63,7 @@ Uncomment one of the theme blocks in `border-themes.css`:
 --xl-radius: 25px; /* Very rounded */
 ```
 
-## ✨ Special Border Classes
+##  Special Border Classes
 
 You can add these classes to any element:
 
@@ -96,7 +96,7 @@ You can add these classes to any element:
 - `.border-scanner` - Scanning beam effect across border
 - `.border-tube` - Neon tube effect with gradient
 
-## 🎯 Elements Affected
+##  Elements Affected
 
 The CSS automatically styles these elements:
 
@@ -108,14 +108,14 @@ The CSS automatically styles these elements:
 - Alerts (`.alert`)
 - Images (`img`)
 
-## 📱 Responsive Design
+##  Responsive Design
 
 Borders automatically adjust on mobile devices:
 
 - Thinner borders on screens smaller than 768px
 - Maintains visual hierarchy on all devices
 
-## 🚀 Usage Examples
+##  Usage Examples
 
 ### In JSX Components
 
@@ -142,7 +142,7 @@ To change from gold to blue theme, edit `border-themes.css`:
 }
 ```
 
-## 🔧 Advanced Customization
+##  Advanced Customization
 
 ### Add New Border Styles
 
@@ -163,7 +163,7 @@ Add to `custom-borders.css`:
 }
 ```
 
-## 💡 Tips
+## Tips
 
 1. **Test Changes**: Restart your dev server after editing CSS files
 2. **Use Variables**: Always use CSS variables for consistency
@@ -171,7 +171,7 @@ Add to `custom-borders.css`:
 4. **Performance**: Use `!important` sparingly, only when overriding Bootstrap
 5. **Theme Switching**: Comment/uncomment theme blocks for quick changes
 
-## 🌟 Live Preview
+## Live Preview
 
 Your changes will be visible immediately on:
 
@@ -181,7 +181,7 @@ Your changes will be visible immediately on:
 - Buttons and form inputs
 - All interactive elements
 
-## ⚡ Neon Beam Effects Guide
+## Neon Beam Effects Guide
 
 ### Automatic Neon Effects
 
@@ -227,4 +227,4 @@ Edit the neon variables in `border-themes.css`:
 
 Neon effects use CSS `box-shadow` with multiple layers. For better performance on mobile devices, the effects automatically scale down on smaller screens.
 
-May the Force be with your borders! ⭐
+May the Force be with your borders! 
